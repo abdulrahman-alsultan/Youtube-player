@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 "ID" to "Up63iX6gzfk"
             )
         )
-        fetchImage(this)
+
 
         rvMain = findViewById(R.id.rvMain)
         adapter = VideoRecyclerViewAdapter(videosList, sharedPreferences)
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         if(activeNetwork?.isConnectedOrConnecting == true) {
-
+            fetchImage(this)
             rvMain.visibility = View.VISIBLE
         }
         else
