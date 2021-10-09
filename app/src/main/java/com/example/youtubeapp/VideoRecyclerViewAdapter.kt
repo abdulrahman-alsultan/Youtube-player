@@ -2,6 +2,7 @@ package com.example.youtubeapp
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.youtube_item_row.view.*
 
 
-class VideoRecyclerViewAdapter(private val videoList: List<Map<String, Any>>, val sharedPreferences: SharedPreferences): RecyclerView.Adapter<VideoRecyclerViewAdapter.ViewItemHolder>() {
+class VideoRecyclerViewAdapter(private val videoList: List<Map<String, Any>>, private val sharedPreferences: SharedPreferences): RecyclerView.Adapter<VideoRecyclerViewAdapter.ViewItemHolder>() {
 
     val selectedVideoToPlay = arrayListOf<Int>()
     var canPlayVideos = false
@@ -38,6 +40,11 @@ class VideoRecyclerViewAdapter(private val videoList: List<Map<String, Any>>, va
         holder.itemView.apply {
             video_title2.text = video["Title2"].toString()
             video_views.text = "Views: ${video["Views"]}"
+            if(video["Image"] != R.drawable.iic){
+                Picasso.get().load(video["Image"].toString()).into(video_image)
+            }
+
+
 
             card_view.setOnClickListener {
                 if(position != currentVideo){
